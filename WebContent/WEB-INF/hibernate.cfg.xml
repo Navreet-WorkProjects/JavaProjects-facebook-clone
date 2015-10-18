@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		
+<hibernate-configuration>
+  <session-factory>
+  	<!-- We're using MySQL database so the dialect needs to MySQL as well-->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <!-- Enable this to see the SQL statements in the logs-->
+    <property name="show_sql">false</property>
+    <!-- This will drop our existing database and re-create a new one.
+    		Existing data will be deleted! -->
+    <property name="hbm2ddl.auto">create</property>
+  </session-factory>
+</hibernate-configuration>

@@ -116,7 +116,7 @@
 		<form:form class='form-horizontal' id='basicBootstrapForm'  modelAttribute='personAttribute' method='POST' action='${savePerson}'>
 		
     <div class="form-group">
-   0     <label class="col-xs-3 control-label">Full name</label>
+       <label class="col-xs-3 control-label">Full name</label>
         <div class="col-xs-4">
             <input type="text" class="form-control" name="firstName" placeholder="First name" />
         </div>

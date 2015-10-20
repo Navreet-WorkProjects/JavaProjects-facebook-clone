@@ -8,11 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * For a complete reference see 
- * <a href="http://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/">
- * Hibernate Annotations Communit Documentations</a>
- */
+
 @Entity
 @Table(name = "PERSON")
 public class Person implements Serializable {
@@ -30,9 +26,28 @@ public class Person implements Serializable {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	
-	@Column(name = "MONEY")
-	private Double money;
+	
+	@Column(name="Email")
+	private String email;
+	
+	
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column(name = "USERNAME")
+	private String username;
+	
+	@Column(name="Password")
+	private String password;
+
+	@Column(name="Gender")
+	private String gender;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,11 +72,30 @@ public class Person implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Double getMoney() {
-		return money;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMoney(Double money) {
-		this.money = money;
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	
+	
 }

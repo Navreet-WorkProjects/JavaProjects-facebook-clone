@@ -1,5 +1,7 @@
 package com.socialcommunity.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,12 +60,16 @@ public class PersonService {
 	}
 	/**
 	 * Adds a new person
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public void add(Person person) {
-		logger.debug("Adding new person");
+	public void addUser(String password,Person person) throws NoSuchAlgorithmException {
+		logger.debug("Adding new User");
 		
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
+
+		person.setPassword(createHash(password));
+		
 		
 		// Save
 		session.save(person);
@@ -101,9 +107,25 @@ public class PersonService {
 		// Assign updated values to this person
 		existingPerson.setFirstName(person.getFirstName());
 		existingPerson.setLastName(person.getLastName());
-		existingPerson.setMoney(person.getMoney());
+	
 
 		// Save updates
 		session.save(existingPerson);
 	}
+	
+	
+	//Hash Function to converting into HashFunction
+	public String createHash(String data) throws NoSuchAlgorithmException{
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        digest.update(data.getBytes());
+        byte byteData[] = digest.digest();
+        //convert bytes to hex chars
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
+}
+	
+	
 }

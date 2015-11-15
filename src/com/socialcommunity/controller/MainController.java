@@ -108,8 +108,7 @@ public class MainController {
 	}
       
 }
-    
-
+   
     @RequestMapping(value = "/lendingPage/{username}", method = RequestMethod.GET)
   public String profilePage(@PathVariable("username")String username,HttpSession session) throws HibernateException, NoSuchAlgorithmException
   {
@@ -117,10 +116,8 @@ public class MainController {
     username=(String) session.getAttribute("username");
     
     	
-    	
 	return "admin";
-	  
-	
+	 
 }
     
     

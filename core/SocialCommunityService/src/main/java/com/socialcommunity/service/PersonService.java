@@ -11,7 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.socialcommunity.dao.PersonDao;
@@ -21,12 +21,10 @@ import com.socialcommunity.domain.Person;
  * Service for processing Persons
  * 
  */
-@Service("personService")
-@Transactional
-public class PersonService {
 
+
+public class PersonService {
 	
-	@Resource(name="personDao")
 	private PersonDao dao;
 	
 	protected static Logger logger = Logger.getLogger("service");
@@ -79,8 +77,6 @@ public class PersonService {
 		dao.edit(person);
 	}
 	
-	
-
 	
 	  public String checkLogin(String userName, String password) throws HibernateException, NoSuchAlgorithmException{
 		

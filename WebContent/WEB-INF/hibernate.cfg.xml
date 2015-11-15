@@ -13,9 +13,7 @@
     		Existing data will be deleted! -->
     <property name="hbm2ddl.auto">create</property>
     
-    <mapping class="com.socialcommunity.domain.Comment"/>
-   <mapping class="com.socialcommunity.domain.Post"/>
-          
+    
     
     
     

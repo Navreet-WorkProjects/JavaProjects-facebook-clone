@@ -4,28 +4,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
-
 import com.socialcommunity.domain.Person;
-
-
-
-@Repository
 
 public class PersonDao {
 	
 	
-	
 	protected static Logger logger = Logger.getLogger("DataAccessLayer");
 	
-	@Resource(name="sessionFactory")
+
 	private SessionFactory sessionFactory;
 	
 	/**

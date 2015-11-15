@@ -66,8 +66,6 @@
                               <a href="#header"> <i class="ion-ios-home-outline"></i> </a>
                           <a href="#clients"> <i class="ion-ios-grid-view-outline"></i> </a>
                           <a href="#contact"> <i class="ion-ios-chatboxes-outline"></i> </a>
-                          
-
                           </div>                    
                 </div>
                       
@@ -317,7 +315,9 @@ function checkCaptcha(value, validator, $field) {
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                 <form id="loginForm" method="post" class="form-horizontal">
+                <c:url var="loginPerson" value="/lendingPage/login" />
+		<form:form class='form-horizontal' id='loginForm'  modelAttribute='personAttribute' method='POST' action='${loginPerson}'>
+                 
                     <div class="form-group">
                         <label class="col-xs-3 control-label">Username</label>
                         <div class="col-xs-5">
@@ -338,7 +338,7 @@ function checkCaptcha(value, validator, $field) {
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>

@@ -1,19 +1,17 @@
 package com.socialcommunity.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 import javax.annotation.Resource;
-
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.socialcommunity.domain.Person;
 import com.socialcommunity.service.PersonService;
@@ -29,6 +27,10 @@ public class MainController {
 	@Resource(name="personService")
 	private PersonService personService;
 	
+	
+	private Person person;
+	
+	
 	/**
 	 * Handles and retrieves all persons and show it in a JSP page
 	 * 
@@ -41,7 +43,6 @@ public class MainController {
 		
 		
 	}
-	
 	
     /**
      * Retrieves the add page
@@ -84,16 +85,43 @@ public class MainController {
 		personService.addUser(person.getPassword(), person);
 
     	// This will resolve to /WEB-INF/jsp/addedpage.jsp
-		return "redirect:/lendingPage";
+		return "redirect:/lendingPage	";
 	}
     
     
+    @RequestMapping(value = "/lendingPage/login", method = RequestMethod.POST)
+  public String login(@ModelAttribute("personlogin") Person person,BindingResult result,HttpSession session) throws HibernateException, NoSuchAlgorithmException
+  {
+	  
+	String userFound=personService.checkLogin(person.getUsername(),person.getPassword()); 
+	 
+	if(userFound=="success")
+	{
+	
+		session.setAttribute("username",person.getUsername());
+		 return "redirect:/lendingPage/"+person.getUsername();
+	
+	}
+	else
+	{
+		return "redirect:/lendingPage/error";
+	}
+      
+}
     
+
+    @RequestMapping(value = "/lendingPage/{username}", method = RequestMethod.GET)
+  public String profilePage(@PathVariable("username")String username,HttpSession session) throws HibernateException, NoSuchAlgorithmException
+  {
+    	
+    username=(String) session.getAttribute("username");
     
+    	
+    	
+	return "admin";
+	  
+	
+}
     
-   
-    
-   
-   
     
 }

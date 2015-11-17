@@ -18,6 +18,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/arpitparikh/Desktop/Big Data And Analytics/SocialCommunityDao.jar"/>
+	<classpathentry kind="lib" path="F:/Full_Stack/SocialCommunityDao.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

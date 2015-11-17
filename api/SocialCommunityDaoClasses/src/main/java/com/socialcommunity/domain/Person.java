@@ -1,11 +1,14 @@
 package com.socialcommunity.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.socialcommunity.constants.Status;
 
 
 @Entity
@@ -47,6 +50,26 @@ public class Person implements Serializable {
 	@Column(name="Gender")
 	private String gender;
 	
+	private String DOB;
+	private Status status;
+	
+	
+	public String getDOB() {
+		return DOB;
+	}
+
+	public void setDOB(String dOB) {
+		DOB = dOB;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public Integer getId() {
 		return id;
 	}

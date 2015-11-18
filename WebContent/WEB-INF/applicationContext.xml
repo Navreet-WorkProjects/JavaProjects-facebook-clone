@@ -29,7 +29,9 @@
 
 <bean id="personService" class="com.socialcommunity.service.PersonService"/>
 <bean id="personDao" class="com.socialcommunity.dao.PersonDao"/>
-<bean id="adminService" class="com.socialcommunity.service.AdminService"/>
+<bean id="adminService" class="com.socialcommunity.service.AdminService">
+ <property name="adminDao" ref="adminDao" />
+</bean>
 <bean id="adminDao" class="com.socialcommunity.dao.AdminDao"/>	
 	
 

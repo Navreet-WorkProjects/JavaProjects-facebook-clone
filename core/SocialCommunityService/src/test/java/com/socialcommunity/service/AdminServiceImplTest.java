@@ -1,7 +1,6 @@
 package com.socialcommunity.service;
 
 import com.socialcommunity.constants.Status;
-import com.socialcommunity.dao.AdminDaoImpl;
 import com.socialcommunity.domain.Person;
 
 import junit.framework.TestCase;

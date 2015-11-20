@@ -27,57 +27,95 @@ import com.socialcommunity.service.AdminService;
 @Controller
 public class AdminController {
 
-	protected static Logger logger = Logger.getLogger("Admincontroller");
+	protected static Logger logger = Logger.getLogger("AdminController");
+	// username viewed/edited by admin
 	private String username;
+	// DOB of user
 	private String DOB;
+	// current status of user
 	private Status currentStatus;
+	// updated status of user
 	private Status updateTheStatus;
-	private int numberOfUsers;
+	// total number of users
+	private Long numberOfUsers;
+	// status options to be displayed on jsp dropdown
 	private List<Status> statusList = new ArrayList<Status>();
 	
-	
+	/**
+	 * Getter for updated status
+	 * @return updated status
+	 */
 	public Status getUpdateTheStatus() {
 		return updateTheStatus;
 	}
-
+	
+	/**
+	 * Setter for updated status
+	 * @param updateTheStatus updated status
+	 */
 	public void setUpdateTheStatus(Status updateTheStatus) {
 		this.updateTheStatus = updateTheStatus;
 	}
+	
+	/**
+	 * service instance
+	 */
 	@Resource(name="adminService")
 	private AdminService adminService;
 	
 	/**
-     * Retrieves the add page
+     * Retrieves the admin page
      * 
      * @return the name of the JSP page
      */
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model) {
-    	numberOfUsers = adminService.getUserCount();
-    	model.addAttribute("numberOfUsers", numberOfUsers);
     	logger.debug("Received request to show admin page");
+    	// gets the number of users using the application
+    	numberOfUsers = adminService.getUserCount();
+    	// to send number of users to jsp
+    	model.addAttribute("numberOfUsers", numberOfUsers);    	
     	return "admin";
     }
     
+    /**
+     * Redirect to edit user status page
+     * @param search username passed from the jsp
+     * @param result binding result
+     * @return redirect to editUserDetails page
+     * @throws NoSuchAlgorithmException
+     */
     @RequestMapping(value = "/admin/editUserDetails", method = RequestMethod.GET)
     public String searchPerson(@ModelAttribute("searchPerson") Search search,BindingResult result) throws NoSuchAlgorithmException {
-		logger.debug("Received request to search a person");
-		
-    	
-		System.out.println(search.getSearchString());
-		
+		logger.debug("Received request by admin to search detail of a person");
+		// calling service method to get number of users
 		Person searchResult = adminService.getSearchResult(search.getSearchString());
+		// DB details retrieved of the user
 		username = searchResult.getUsername();
 		DOB = searchResult.getDOB();
-		currentStatus = searchResult.getStatus();		
+		if (searchResult.getStatus() == "ACTIVE") {
+			currentStatus = Status.ACTIVE;
+		} else if (searchResult.getStatus() == "BLOCK") {
+			currentStatus = Status.BLOCK;
+		}		
+		// reset the update status for new search
 		updateTheStatus = null;
 		
 		return "redirect:/editUserDetails";
 	}
+    
+    /**
+     * editUserDetailsPage handler method 
+     * @param model to send data from controller to jsp
+     * @return editUserDetailsPage
+     */
     @RequestMapping(value = "/editUserDetails", method = RequestMethod.GET)
     public String editUserDetailsPage(Model model) {
+    	logger.debug("Received request by admin to displayeditUserDetails Page");
+    	// adding options to status List to display on jsp
     	statusList.add(Status.ACTIVE);
     	statusList.add(Status.BLOCK);
+    	// details added to model soa that they can be displayed on jsp page
     	model.addAttribute("username", username);
     	model.addAttribute("DOB", DOB);
     	model.addAttribute("status",currentStatus);
@@ -88,26 +126,29 @@ public class AdminController {
     		model.addAttribute("message","No Records Found");
     	}
     	model.addAttribute("updatePerson", new UpdatePerson());
-    	logger.debug("Received request to show editUserDetails page");
     	return "editUserDetails";
     }
+    
+    /**
+     * Update status handler
+     * @param updateStatus the status to be updated
+     * @param update sending data from jsp to controller
+     * @param result binding result
+     * @return editUserDetailsPage
+     * @throws NoSuchAlgorithmException
+     */
     @RequestMapping(value = "/editUserDetails/updatePerson", method = RequestMethod.GET)
     public String updatePerson(@RequestParam String updateStatus, @ModelAttribute("updatePerson") UpdatePerson update,BindingResult result) throws NoSuchAlgorithmException {
-		logger.debug("Received request to search a person");   	
-		System.out.println(update.getUpdateStatus());		
-		username = update.getUserName();
+		logger.debug("Received request to update a person");  
+		// get the status to be updated
 		if (updateStatus.equalsIgnoreCase("ACTIVE")) {
 			updateTheStatus = Status.ACTIVE;
 		} else if (updateStatus.equalsIgnoreCase("BLOCK")) {
 			updateTheStatus = Status.BLOCK;
 		}	
+		//call service method to update the status
 		adminService.updatePerson(updateTheStatus, username);
 		return "redirect:/editUserDetails";
 	}
-   /* @RequestMapping(value = "/updatePerson", method = RequestMethod.GET)
-    public String updatePersonFlow(Model model) {
-    	model.addAttribute("message","Update Successful");
-    	logger.debug("Received request to show admin page");
-    	return "redirect:/editUserDetails";
-    }*/
+ 
 }

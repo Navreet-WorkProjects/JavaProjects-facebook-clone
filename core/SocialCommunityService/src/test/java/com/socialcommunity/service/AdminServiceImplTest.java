@@ -11,16 +11,18 @@ public class AdminServiceImplTest extends TestCase {
 		
 		/**
 		 * Testing getUserCount()
+		 * @throws Exception 
 		 */
-		public void testGetUserCount() {
+		public void testGetUserCount() throws Exception {
 			Long result = 1L;
 			assertEquals(result, adminServiceImpl.getUserCount());
 		}
 		
 		/**
 		 * Testing updatePerson()
+		 * @throws Exception 
 		 */
-		public void testUpdatePerson() {
+		public void testUpdatePerson() throws Exception {
 			Status status = Status.ACTIVE;
 			String username = "admin1";
 			assertEquals("success", adminServiceImpl.updatePerson(status, username));
@@ -28,8 +30,9 @@ public class AdminServiceImplTest extends TestCase {
 		
 		/**
 		 * Testing getSearchResult()
+		 * @throws Exception 
 		 */
-		public void testGetSearchResult() {
+		public void testGetSearchResult() throws Exception {
 			String username = "admin1";
 			Person search = adminServiceImpl.getSearchResult(username);
 			assertEquals("Navreet", search.getFirstName());

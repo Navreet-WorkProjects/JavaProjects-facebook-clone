@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService{
 	/**
 	 * To get number of users
 	 */
-	public Long getUserCount() {
+	public Long getUserCount() throws Exception{
 		logger.debug("Retrieving number of users");
 		// calling dao methog to get the count
 		Long result = adminDao.getUserCount();
@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService{
 	 * @param status - user can be active or blocked
 	 * @param username - username of the user
 	 */
-	public String updatePerson(Status status, String username) {
+	public String updatePerson(Status status, String username) throws Exception{
 		logger.debug("Update user status");
 		// calling dao methog to update status
 		adminDao.updatePerson(status, username);
@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService{
 	 * @param searchString username of user
 	 * @return
 	 */
-	public Person getSearchResult(String searchString) {	
+	public Person getSearchResult(String searchString) throws Exception{	
 		logger.debug("Search a particular user by it's username ");
 		// calling dao method to search person detail based on the username
 		Person search = adminDao.getSearchResult(searchString);

@@ -11,16 +11,18 @@ public class AdminDaoImplTest extends TestCase {
 	
 	/**
 	 * Testing getUserCount()
+	 * @throws Exception 
 	 */
-	public void testGetUserCount() {
+	public void testGetUserCount() throws Exception {
 		Long result = 1L;
 		assertEquals(result, adminDaoImpl.getUserCount());
 	}
 	
 	/**
 	 * Testing updatePerson()
+	 * @throws Exception 
 	 */
-	public void testUpdatePerson() {
+	public void testUpdatePerson() throws Exception {
 		Status status = Status.ACTIVE;
 		String username = "admin1";
 		assertEquals("success", adminDaoImpl.updatePerson(status, username));
@@ -28,8 +30,9 @@ public class AdminDaoImplTest extends TestCase {
 	
 	/**
 	 * Testing getSearchResult()
+	 * @throws Exception 
 	 */
-	public void testGetSearchResult() {
+	public void testGetSearchResult() throws Exception {
 		String username = "admin1";
 		Person search = adminDaoImpl.getSearchResult(username);
 		assertEquals("Navreet", search.getFirstName());

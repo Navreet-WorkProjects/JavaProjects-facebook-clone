@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import com.socialcommunity.constants.Status;
 import com.socialcommunity.domain.Person;
 
@@ -17,7 +18,7 @@ public class AdminDaoImpl implements AdminDao{
 	/**
 	 * To get number of users
 	 */
-	public Long getUserCount() {
+	public Long getUserCount() throws Exception{
 		logger.debug("Retrieving detail of a person");
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();				
@@ -33,7 +34,7 @@ public class AdminDaoImpl implements AdminDao{
 	 * @param status - user can be active or blocked
 	 * @param username - username of the user
 	 */
-	public String updatePerson(Status status, String username) {
+	public String updatePerson(Status status, String username) throws Exception{
 		logger.debug("Update user status");
 		Session session = sessionFactory.getCurrentSession();	
 		Query query= session.createQuery("update Person set STATUS=:STATUS where USERNAME=:USERNAME");
@@ -49,7 +50,7 @@ public class AdminDaoImpl implements AdminDao{
 	 * @param searchString username of user
 	 * @return
 	 */
-	public Person getSearchResult(String searchString) {
+	public Person getSearchResult(String searchString) throws Exception{
 	    logger.debug("Search user details");
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM  Person where USERNAME=:USERNAME");

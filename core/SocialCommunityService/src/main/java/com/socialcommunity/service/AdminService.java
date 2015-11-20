@@ -5,10 +5,10 @@ import com.socialcommunity.domain.Person;
 
 public interface AdminService {
 	
-	public Long getUserCount(); 
+	public Long getUserCount() throws Exception; 
 	
-	public String updatePerson(Status status, String username);
+	public String updatePerson(Status status, String username) throws Exception;
 	
-	public Person getSearchResult(String searchString);
+	public Person getSearchResult(String searchString) throws Exception;
 
 }

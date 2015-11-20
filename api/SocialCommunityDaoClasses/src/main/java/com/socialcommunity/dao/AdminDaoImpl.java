@@ -60,8 +60,8 @@ public class AdminDaoImpl implements AdminDao{
 		search.setDOB("10/04/1985");
 		search.setUsername("alle");
 		search.setStatus(Status.ACTIVE);*/
-		return search;
 		logger.debug("User details retrieved");
+		return search;	
     }
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

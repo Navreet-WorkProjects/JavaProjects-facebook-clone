@@ -13,6 +13,7 @@ public class Comment implements Serializable {
 
 	private static final long serialVersionUID = -5527566248002296042L;
 	
+	
 	@Id
 	@Column(name = "COMMENTID")
 	@GeneratedValue

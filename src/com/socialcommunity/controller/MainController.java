@@ -1,10 +1,24 @@
 package com.socialcommunity.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+
+
+import java.util.List;
+
+
+
+
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +26,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+
+
+
 
 import com.socialcommunity.domain.Person;
 import com.socialcommunity.service.PersonService;
@@ -26,7 +47,6 @@ public class MainController {
 	
 	@Resource(name="personService")
 	private PersonService personService;
-	
 	
 	private Person person;
 	
@@ -43,13 +63,13 @@ public class MainController {
 		
 		
 	}
-	
     /**
+	
      * Retrieves the add page
      * 
      * @return the name of the JSP page
      */
-    @RequestMapping(value = "/persons/add", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/persons/add", method = RequestMethod.GET)
     public String getAdd(Model model) {
     	logger.debug("Received request to show add page");
     
@@ -60,7 +80,7 @@ public class MainController {
     	// This will resolve to /WEB-INF/jsp/addpage.jsp
     	return "addpage";
 	}
- 
+ */
     /**
      * Adds a new person by delegating the processing to PersonService.
      * Displays a confirmation JSP page
@@ -79,7 +99,8 @@ public class MainController {
 		if (result.hasErrors()) {
 		     return "/lendingPage";
 		   }
-		
+	
+		System.out.println(person.getFirstName());
 		
 		// Call PersonService to do the actual adding
 		personService.addUser(person.getPassword(), person);
@@ -87,8 +108,7 @@ public class MainController {
     	// This will resolve to /WEB-INF/jsp/addedpage.jsp
 		return "redirect:/lendingPage	";
 	}
-    
-    
+
     @RequestMapping(value = "/lendingPage/login", method = RequestMethod.POST)
   public String login(@ModelAttribute("personlogin") Person person,BindingResult result,HttpSession session) throws HibernateException, NoSuchAlgorithmException
   {
@@ -97,9 +117,15 @@ public class MainController {
 	 
 	if(userFound=="success")
 	{
-	
+		
 		session.setAttribute("username",person.getUsername());
-		 return "redirect:/lendingPage/"+person.getUsername();
+		 
+		if(person.getUsername().equalsIgnoreCase("admin1")){
+
+			return "redirect:/admin";
+		} else {
+			return "redirect:/lendingPage/"+person.getUsername();
+		}
 	
 	}
 	else
@@ -108,17 +134,42 @@ public class MainController {
 	}
       
 }
+ 
    
-    @RequestMapping(value = "/lendingPage/{username}", method = RequestMethod.GET)
-  public String profilePage(@PathVariable("username")String username,HttpSession session) throws HibernateException, NoSuchAlgorithmException
-  {
-    	
-    username=(String) session.getAttribute("username");
-    
-    	
-	return "admin";
-	 
-}
-    
-    
+	
+
+/*
+  
+  @RequestMapping(value = "/getTags", method = RequestMethod.GET)
+	public @ResponseBody
+
+	List<Person> getTags(@RequestParam String username,HttpSession session) {
+	    username=(String) session.getAttribute("username");
+	  
+	    List<Person> data =  new ArrayList<Person>();
+	    data.add((Person) personService.getAll());
+	   List<Person> result = new ArrayList<Person>();
+		// iterate a list and filter by tagName
+		for (Person person : data) {
+			if (person.getUsername().contains(username)) {
+				result.add(person)	;
+			}
+		}
+
+		return simulateSearchResult(username);
+
+	}
+  
+  
+	private List<Person> simulateSearchResult(String tagName) {
+
+		List<Person> result = new ArrayList<Person>();
+
+	
+		return result;
+	}
+
+ */ 
+  
+  
 }

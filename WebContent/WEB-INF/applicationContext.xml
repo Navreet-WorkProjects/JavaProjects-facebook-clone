@@ -27,13 +27,29 @@
 	<!-- Load Hibernate related configuration -->
 	<import resource="hibernate-context.xml" />
 
-<bean id="personService" class="com.socialcommunity.service.PersonService"/>
-<bean id="personDao" class="com.socialcommunity.dao.PersonDao"/>
-<bean id="adminService" class="com.socialcommunity.service.AdminService">
+<bean id="personDao" class="com.socialcommunity.dao.PersonDao">
+<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<bean id="personService" class="com.socialcommunity.service.PersonService">
+<property name="personDao" ref="personDao" />
+</bean>
+	<bean id="adminService" class="com.socialcommunity.service.AdminService">
  <property name="adminDao" ref="adminDao" />
 </bean>
-<bean id="adminDao" class="com.socialcommunity.dao.AdminDao"/>	
-	
+<bean id="adminDao" class="com.socialcommunity.dao.AdminDao">
+<property name="sessionFactory" ref="sessionFactory" />
+</bean>	
 
-	
+
+<bean id="postDao" class="com.socialcommunity.dao.PostDao">
+<property name="sessionFactory" ref="sessionFactory" />
+</bean>	
+
+<bean id="postService" class="com.socialcommunity.service.PostService">
+ <property name="postDao" ref="postDao" />
+</bean>
+
+
+
 </beans>

@@ -29,7 +29,7 @@ public class Person implements Serializable {
 	private String lastName;
 	
 	
-	@Column(name="Email")
+	@Column(name="EMAIL")
 	private String email;
 	
 	
@@ -44,14 +44,17 @@ public class Person implements Serializable {
 	@Column(name = "USERNAME")
 	private String username;
 	
-	@Column(name="Password")
+	@Column(name="PASSWORD")
 	private String password;
 
-	@Column(name="Gender")
+	@Column(name="GENDER")
 	private String gender;
 	
+	@Column(name="DOB")
 	private String DOB;
-	private Status status;
+	
+	@Column(name="STATUS")
+	private String status;
 	
 	
 	public String getDOB() {
@@ -62,11 +65,11 @@ public class Person implements Serializable {
 		DOB = dOB;
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

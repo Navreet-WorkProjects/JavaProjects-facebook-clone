@@ -25,6 +25,9 @@ import com.socialcommunity.service.AdminService;
 @Controller
 public class AdminController {
 
+	@Resource(name = "adminService")
+	private AdminService adminService;
+	
 	protected static Logger logger = Logger.getLogger("AdminController");
 	// username viewed/edited by admin
 	private String username;
@@ -61,9 +64,7 @@ public class AdminController {
 	/**
 	 * service instance
 	 */
-	@Resource(name = "adminService")
-	private AdminService adminService;
-
+	
 	/**
 	 * Retrieves the admin page
 	 * 

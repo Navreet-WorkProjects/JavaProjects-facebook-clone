@@ -105,9 +105,9 @@ public class AdminController {
 			// DB details retrieved of the user
 			username = searchResult.getUsername();
 			DOB = searchResult.getDOB();
-			if (searchResult.getStatus() == "ACTIVE") {
+			if (searchResult.getStatus().equalsIgnoreCase("ACTIVE")) {
 				currentStatus = Status.ACTIVE;
-			} else if (searchResult.getStatus() == "BLOCK") {
+			} else if (searchResult.getStatus().equalsIgnoreCase("BLOCK")) {
 				currentStatus = Status.BLOCK;
 			}
 			// reset the update status for new search
@@ -130,6 +130,7 @@ public class AdminController {
 	public String editUserDetailsPage(Model model) {
 		logger.debug("Received request by admin to displayeditUserDetails Page");
 		// adding options to status List to display on jsp
+		statusList = new ArrayList<Status>();
 		statusList.add(Status.ACTIVE);
 		statusList.add(Status.BLOCK);
 		// details added to model soa that they can be displayed on jsp page

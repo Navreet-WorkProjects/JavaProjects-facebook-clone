@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -60,7 +59,5 @@ public class Comment implements Serializable {
 	public void setComment(Integer comment) {
 		this.comment = comment;
 	}
-	
-
-	
+		
 }

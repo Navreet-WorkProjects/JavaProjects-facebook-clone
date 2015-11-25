@@ -12,7 +12,6 @@ import com.socialcommunity.constants.Status;
 
 
 @Entity
-@Table(name = "PERSON")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -5527566248002296042L;

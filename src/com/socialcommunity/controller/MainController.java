@@ -2,20 +2,12 @@ package com.socialcommunity.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-
-
 import java.util.List;
-
-
-
-
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.dao.PessimisticLockingFailureException;
@@ -28,18 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-
-
-
-
 import com.socialcommunity.domain.Person;
 import com.socialcommunity.service.PersonService;
 
 /**
  * Handles and retrieves User request
  */
+
 @Controller
 public class MainController {
 
@@ -50,20 +37,20 @@ public class MainController {
 	
 	private Person person;
 	
-	
 	/**
 	 * Handles and retrieves all persons and show it in a JSP page
 	 * 
 	 * @return the name of the JSP page
 	 */
+
 	@RequestMapping(value = "/lendingPage",method = RequestMethod.GET)
 	public String lendingPage()
 	{
 		return "index";
-		
-		
+			
 	}
-    /**
+    
+	/**
 	
      * Retrieves the add page
      * 
@@ -87,8 +74,7 @@ public class MainController {
      * 
      * @return  the name of the JSP page
      * @throws NoSuchAlgorithmException 
-     */
-    
+     */  
     @RequestMapping(value = "/lendingPage/add", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("personAttribute") Person person,BindingResult result) throws NoSuchAlgorithmException {
 		logger.debug("Received request to add new person");
@@ -109,7 +95,7 @@ public class MainController {
 		return "redirect:/lendingPage	";
 	}
 
-    @RequestMapping(value = "/lendingPage/login", method = RequestMethod.POST)
+  @RequestMapping(value = "/lendingPage/login", method = RequestMethod.POST)
   public String login(@ModelAttribute("personlogin") Person person,BindingResult result,HttpSession session) throws HibernateException, NoSuchAlgorithmException
   {
 	  
@@ -134,10 +120,7 @@ public class MainController {
 	}
       
 }
- 
-   
-	
-
+  
 /*
   
   @RequestMapping(value = "/getTags", method = RequestMethod.GET)
@@ -158,9 +141,7 @@ public class MainController {
 
 		return simulateSearchResult(username);
 
-	}
-  
-  
+	}  
 	private List<Person> simulateSearchResult(String tagName) {
 
 		List<Person> result = new ArrayList<Person>();
@@ -170,6 +151,5 @@ public class MainController {
 	}
 
  */ 
-  
   
 }

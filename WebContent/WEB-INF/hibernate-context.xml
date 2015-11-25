@@ -25,7 +25,20 @@
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 				 p:dataSource-ref="dataSource"
 				 p:configLocation="${hibernate.config}"
-				 p:packagesToScan="com.socialcommunity"/>
+				 p:packagesToScan="com.socialcommunity">
+				 
+				 		 <property name="annotatedClasses">
+        <list>
+            <value>com.socialcommunity.domain.Person</value>
+             <value>com.socialcommunity.domain.Post</value>
+            
+        </list>
+    </property>
+				 
+				 </bean>
+	
+	
+	
 	
 	<!-- Declare a datasource that has pooling capabilities-->	 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

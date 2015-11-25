@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import com.socialcommunity.dao.PersonDao;
@@ -84,5 +83,11 @@ public class PersonServiceImpl implements PersonService{
 		
 		  return personDao.checkLogin(userName, password);
      }
+
+	@Override
+	public List<Person> getUserInformation(String username) {
+		// TODO Auto-generated method stub
+		return personDao.getUserInformation(username);
+	}
 
 }

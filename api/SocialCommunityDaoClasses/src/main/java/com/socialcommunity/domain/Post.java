@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-
 public class Post implements Serializable {
 
 	private static final long serialVersionUID = -5527566248002296042L;

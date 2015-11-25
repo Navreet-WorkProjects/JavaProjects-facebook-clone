@@ -16,6 +16,7 @@ public interface PersonDao {
 	//public void edit(Person person);
 	public String createHash(String data) throws NoSuchAlgorithmException;
 	public String checkLogin(String userName, String password) throws HibernateException, NoSuchAlgorithmException;
+	public List<Person> getUserInformation(String username);
 	
 
 }

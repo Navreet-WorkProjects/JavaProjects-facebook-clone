@@ -14,7 +14,8 @@ public class AdminDaoImplTest extends TestCase {
 	 * @throws Exception 
 	 */
 	public void testGetUserCount() throws Exception {
-		Long result = 1L;
+		Long result = 2L;
+		System.out.println(adminDaoImpl.getUserCount());
 		assertEquals(result, adminDaoImpl.getUserCount());
 	}
 	

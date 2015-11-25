@@ -2,8 +2,8 @@ package com.socialcommunity.dao;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -38,13 +38,14 @@ public class PersonDaoImpl implements PersonDao{
 		logger.debug("Retrieving all persons");
 		
 		// Retrieve session from Hibernate
-		Session session = (Session) sessionFactory.getCurrentSession().beginTransaction();
-		
+		Session session = sessionFactory.openSession();
 		// Create a Hibernate query (HQL)
 		Query query = session.createQuery("FROM  Person");
 		
-		// Retrieve all
-		return  query.list();
+		List<Person> list=query.list();
+		
+		// Retrieve all persons
+		return  list;
 	}
 	
 	/**
@@ -149,7 +150,7 @@ public class PersonDaoImpl implements PersonDao{
 			
 			
 			query.setParameter(1,createHash(password));
-			List list = query.list();
+			List<Person> list = query.list();
 			
 			System.out.println(list);
 			if ((list != null) && (list.size() > 0)) {
@@ -163,6 +164,21 @@ public class PersonDaoImpl implements PersonDao{
 			session.close();
 			return userFound;              
      }
+
+	public List<Person> getUserInformation(String username) {
+		// TODO Auto-generated method stub
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Person as E WHERE E.username = ?";
+		
+		Query query=session.createQuery(hql);
+		query.setParameter(0, username);
+		List<Person> list=query.list();
+		
+		
+		
+		return list;
+	}
 	
 
 	

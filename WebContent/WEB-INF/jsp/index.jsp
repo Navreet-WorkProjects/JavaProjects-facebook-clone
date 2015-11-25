@@ -144,6 +144,13 @@
         </div>
     </div>
 
+	  <div class="form-group">
+        <label class="col-xs-3 control-label">DOB</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="DOB" />
+        </div>
+    </div>
+	
     <div class="form-group">
         <label class="col-xs-3 control-label">Gender</label>
         <div class="col-xs-6">

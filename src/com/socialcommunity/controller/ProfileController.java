@@ -1,8 +1,6 @@
 package com.socialcommunity.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +12,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialcommunity.domain.Person;
 import com.socialcommunity.domain.Post;
 import com.socialcommunity.service.PersonService;
@@ -41,13 +42,59 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	
 	
 	  @RequestMapping(value = "/lendingPage/{username}", method = RequestMethod.GET)
-	  public String profilePage(@PathVariable("username")String username,HttpSession session) throws HibernateException, NoSuchAlgorithmException
+	  public ModelAndView profilePage(@PathVariable("username")String username,HttpSession session,Model model) throws HibernateException, NoSuchAlgorithmException
 	  {
 	    	
-	    username=(String) session.getAttribute("username");    	
-		return "profile";
+	    username=(String) session.getAttribute("username");    
+
+		  ObjectMapper mapper = new ObjectMapper();
+		
+		  List<Person> list=personService.getUserNameInformation();
+		  
+			String json = "";
+			try {
+				json = mapper.writeValueAsString(list);
+				System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			ModelAndView model1 = new ModelAndView("profile");
+			
+			 model1.addObject("list", json);
+			
+		return model1;
 	  }
 
+	  
+
+	  @RequestMapping(value = "/lendingPage/public/all", method = RequestMethod.GET)
+	  public ModelAndView publicprofilePage(HttpServletRequest request, HttpServletResponse response,Model model) throws HibernateException, NoSuchAlgorithmException
+	  {
+		  ObjectMapper mapper = new ObjectMapper();
+		
+		  List<Person> list=personService.getUserNameInformation();
+		  
+			String json = "";
+			try {
+				json = mapper.writeValueAsString(list);
+				System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			ModelAndView model1 = new ModelAndView("profile1");
+			
+			 model1.addObject("list", json);
+			
+		return model1;
+	  }
+
+	  
+	  
+	  
+	  
+	  
 	  @RequestMapping(value = "/lendingPage/{username}/post",method = RequestMethod.POST)
 	  public @ResponseBody()
 	  String add(HttpServletRequest request, HttpServletResponse response,HttpSession session)
@@ -69,8 +116,33 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	   return "Submit";
 	  }
 
+	  
 
+	  
+	  @RequestMapping(value = "/lendingPage/public/search",method = RequestMethod.GET)
+	  public @ResponseBody()
+	  String Search(HttpServletRequest request, HttpServletResponse response,HttpSession session)
+	    throws Exception {
 
+		  ObjectMapper mapper = new ObjectMapper();
+		
+		  List<Person> list=personService.getUserNameInformation();
+		  
+			String json = "";
+			try {
+				json = mapper.writeValueAsString(list);
+				System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		    
+	   return json;
+	  }
+
+	  
+	  
+	  
 	  @RequestMapping(value = "/lendingPage/{username}/show",method = RequestMethod.POST)
 	  public @ResponseBody()
 	  String show(HttpServletRequest request, HttpServletResponse response,HttpSession session)
@@ -87,11 +159,32 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 		   Person row =  list.get(i);
 		   System.out.println("Element "+i+row.getGender());
 		   output=row.getFirstName()+":"+row.getLastName()+":"+row.getEmail();
-		   
+		  
 		}
-	  
-	  
-	  
 	   return output;
 	  }
+	  
+
+
+	  @RequestMapping(value = "/lendingPage/{username}/list",method = RequestMethod.POST)
+	  public @ResponseBody()
+	  String list(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
+	   
+	   Post post = new Post();
+	   String username=(String) session.getAttribute("username");
+	   List<Post> list = postService.getPostInformation(username);
+	   String output = "";
+	  
+	   for (int i=0; i<list.size(); i++){
+		   Post row =  list.get(i);
+		   System.out.println("Element "+i+row.getPost());
+		   output=output+":"+row.getPost();
+		
+		   
+		}
+	 
+ 
+	   	
+	  	   return output;
+	  	}
 }

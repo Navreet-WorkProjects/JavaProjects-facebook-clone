@@ -16,6 +16,7 @@ public interface PersonService {
 	//public void edit(Person person);
 	public String checkLogin(String userName, String password) throws HibernateException, NoSuchAlgorithmException;
 	public List<Person> getUserInformation(String username);
+	public List<Person> getUserNameInformation();
 	
 	
 }

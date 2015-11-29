@@ -90,4 +90,10 @@ public class PersonServiceImpl implements PersonService{
 		return personDao.getUserInformation(username);
 	}
 
+	@Override
+	public List<Person> getUserNameInformation() {
+		// TODO Auto-generated method stub
+		return personDao.getUserNameInformation();
+	}
+
 }

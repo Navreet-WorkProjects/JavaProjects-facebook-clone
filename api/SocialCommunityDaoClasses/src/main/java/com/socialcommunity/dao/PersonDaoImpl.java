@@ -181,7 +181,21 @@ public class PersonDaoImpl implements PersonDao{
 	}
 	
 
+	public List<Person> getUserNameInformation() {
+		// TODO Auto-generated method stub
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Person ";
+		
+		Query query=session.createQuery(hql);
+		
+		List<Person> list=query.list();
+		
+		
+		
+		return list;
+	}
 	
-	
+
 	
 }

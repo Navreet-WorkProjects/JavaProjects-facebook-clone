@@ -25,7 +25,7 @@ public class AdminDaoImplTest extends TestCase {
 	 */
 	public void testUpdatePerson() throws Exception {
 		Status status = Status.ACTIVE;
-		String username = "admin1";
+		String username = "arpithparikh";
 		assertEquals("success", adminDaoImpl.updatePerson(status, username));
 	}
 	

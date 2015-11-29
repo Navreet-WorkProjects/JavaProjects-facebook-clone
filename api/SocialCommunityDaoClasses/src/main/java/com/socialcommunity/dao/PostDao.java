@@ -110,5 +110,23 @@ public class PostDao {
 		// Save updates
 		session.save(existingPost);
 	}
+	
+	
+
+	public List<Post> getPostInformation(String username) {
+		// TODO Auto-generated method stub
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Post as E WHERE E.username = ?";
+		
+		Query query=session.createQuery(hql);
+		query.setParameter(0, username);
+		List<Post> list=query.list();
+		
+		
+		
+		return list;
+	}
+
 
 }

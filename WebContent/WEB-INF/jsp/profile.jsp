@@ -7,7 +7,7 @@
 <html lang="en">
 
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <title>Profile Page</title>
@@ -41,7 +41,7 @@
     <link rel="stylesheet" href='<c:url value="/assets/css/bootstrapValidator.css"/>'/>
 <script src='<c:url value="/assets/js/jquery-1.11.1.js"/>'></script>
     <!-- BOOTSTRAP SCRIPTS  -->
-  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>  
     <!-- SCROLLING SCRIPTS PLUGIN  -->
     <script src='<c:url value="/assets/js/jquery.easing.min.js"/>'></script>
     <!-- CUSTOM SCRIPTS   -->
@@ -61,15 +61,145 @@
     <script src='<c:url value="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"/>'></script>
     <script src='<c:url value="/assets/js/bootstrap.min.js"/>'></script>
     <script src='<c:url value="/assets/js/scripts.js"/>'></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <script>
+   
+   window.extGlobalVar;
+  $(document).ready(function() {
+	  
+	  
+	  $.ajax({
+		  type: "post",
+		  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/list",
+		  cache: true,    
+		  data:'username=' + $("#username1").html() ,
+		  success: function(response){
+		  
+			  var countryArray = response.split(':');
+
+			  for (var i = 1; i < countryArray.length; i++) {
+			 
+			  
+			    $("#postLoad").append("<div id="+i+	"class='panel-body'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
+			    append("<div class='input-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");
+				   
+			        
+			  }
+		  
+		  },
+		  error: function(response){      
+			alert(response);
+		  }
+		 });
+	 
+	  
+		 $.ajax({
+	  type: "post",
+	  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/show",
+	  cache: true,    
+	  data:'username=' + $("#username1").html() ,
+	  success: function(response){
+	  var countryArray = response.split(':');
+
+	  for (var i = 0; i < countryArray.length; i++) {
+	  
+		  alert(countryArray[i]);
+	    
+	    $("#firstName").text(countryArray[0]);
+	    $("#lastName").text(countryArray[1]);
+	    $("#email").text(countryArray[2]);
+	  }
+	  
+	  },
+	  error: function(response){      
+		alert(response);
+	  }
+	 });
+		
+		 
+		 /* 
+		 $.ajax({
+		  type: "GET",
+		  url: "http://localhost:9090/SocialCommunity/lendingPage/public/search",
+		  success: function(response){
+			console.log("response"+response);
+			extGlobalVar=response;
+		
+			
+		  },
+		  error: function(response){      
+				console.log("response"+response);
+				}
+		 });
+			
+		 */ 
+		 
+		 var list = ${list};
+			
+		
+			$(document).ready(function() {
+			    $("#auto").autocomplete({
+			        source: function(req, add) {
+			            add($.map(list, function(el) {
+			                return {
+			                    label: el.username,
+			                    zzz: el.id,
+			                    firstname:el.firstname
+			                };
+			            }));
+			        },
+			        select: function(event, ui) {
+			            alert(ui.item.label);
+			            
+			        }
+			    });
+			});
+				  			
+  });
+                  
+             
+</script>
+		
+                <script type="text/javascript">
+                
+               
+function madeAjaxCall1(){
+ alert($("#username1").html());
+
+
+}
+</script>
+		
+	
+	
+                <script type="text/javascript">
+                
+               
+function madeAjaxCall(){
+	$.ajax({
+  type: "post",
+  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/post",
+  cache: false,    
+  data:'post_date='+ $("#post_date").val() ,
+  success: function(response){
+  alert(response);
+  
+  },
+  error: function(response){      
+   alert(response);
+  }
+ });
+}
+</script>
+
+   
    
 </head>
 <body>
-   <div class="wrapper">
-    <div class="box">
+
+    <div class="box" style="align:center">
         <div class="row row-offcanvas row-offcanvas-left">
                            
-
-          
             <!-- main right col -->
             <div class="column col-sm-12 col-xs-11" id="main">
                 
@@ -85,100 +215,18 @@
                       <a href="/" class="navbar-brand logo">b</a>
                   </div>
                   <nav class="collapse navbar-collapse" role="navigation">
-                 <input type="text"  id="w-input-search" value="">
+                 <input type="text"  id="auto" value="">
 	<span>
-	  <button id="button-id" type="button" onclick="madeAjaxCall2()" >Search</button>
+	  <button id="button-id" type="button" onclick="madeAjaxCall1()" >Search</button>
 	</span>
                     
                   </nav>
                 </div>
                 
-                 <script>
-  $(document).ready(function() {
-
-	$('#button-id1').autocomplete({
-		serviceUrl: '${pageContext.request.contextPath}/getTags',
-		paramName: "tagName",
-		delimiter: ",",
-	   transformResult: function(response) {
-		    	
-		return {      	
-		  //must convert json to javascript object before process
-		  suggestions: $.map($.parseJSON(response), function(item) {
-		            	
-		      return { value: item.tagName, data: item.id };
-		   })
-		            
-		 };
-		        
-            }
-		    
-	 });
-				
-  });
-  </script>
-
-                <script type="text/javascript">
-                
-               
-function madeAjaxCall2(){
- alert($("#username1").html());
-	
-	$.ajax({
-  type: "post",
-  url: "http://localhost:9090/SocialCommunity/lendingPage/arpithparikh/show",
-  cache: true,    
-  data:'username=' + $("#username1").html() ,
-  success: function(response){
-  alert(response);
-  
-  },
-  error: function(response){      
-	alert(response);
-  }
- });
-}
-</script>
-		
-                <script type="text/javascript">
-                
-               
-function madeAjaxCall1(){
- alert($("#username1").html());
-	
- var table = $('<table/>').appendTo($('#somediv'));
- $.getJSON('http://localhost:9090/SocialCommunity/lendingPage/arpithparikh/list', function() {
-	 alert("fdfd");
- 
- });
-}
-</script>
-		
-	
-	
-                <script type="text/javascript">
-                
-               
-function madeAjaxCall(){
-	$.ajax({
-  type: "post",
-  url: "http://localhost:9090/SocialCommunity/lendingPage/arpithparikh/post",
-  cache: false,    
-  data:'post_date='+ $("#post_date").val() ,
-  success: function(response){
-  alert(response);
-  
-  },
-  error: function(response){      
-   alert(response);
-  }
- });
-}
-</script>
-                   
+                                    
                 <!-- /top nav -->
-              
-                <div class="padding">
+            
+                <div class="padding" style=" left: 50%;">
                     <div class="full col-sm-9">
                       
                         <!-- content -->                      
@@ -191,17 +239,15 @@ function madeAjaxCall(){
                                 <div class="panel-thumbnail"><!-- <img src="/assets/example/bg_5.jpg" class="img-responsive">--></div>
                                 <div class="panel-body">
                                   <p id="username1" class="lead">${username}</p>
-                                  <p>45 Followers, 13 Posts</p>
+                                  <p>13 Posts</p>
                                   
-                                  <p>
-                                    <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" width="28px" height="28px">
-                                  </p>
+                                 
                                     
                                     <p>
                                         <ul>
-                                            <li id="gender">Gender:</li>
-                                            <li id="occupation">Occupation:</li>
-                                            <li id="city">City</li>
+                                            <li id="firstName"></li>
+                                            <li id="lastName"></li>
+                                            <li id="email"></li>
                                             <li id="dob">DOB:</li>
                                             
                                         </ul>
@@ -224,58 +270,13 @@ function madeAjaxCall(){
                                   </form>
                               </div>
                            
-                        
-                             
                            
                           </div>
                           
                          
-                               <div class="panel panel-default">
-                                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Stackoverflow</h4></div>
-                                  <div class="panel-body">
-                                    <img src="//placehold.it/150x150" class="img-circle pull-right"> <a href="#">Keyword: Bootstrap</a>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    
-                                    <p>If you're looking for help with Bootstrap code, the <code>twitter-bootstrap</code> tag at <a href="http://stackoverflow.com/questions/tagged/twitter-bootstrap">Stackoverflow</a> is a good place to find answers.</p>
-                                    
-                                    <hr>
-                                    <c:url var="comment" value='/lendingPage/+${username}/+${comment}' />
-                                    <form:form class="form-horizontal" role="form" id='commentForm'  modelAttribute='commentAttribute' method='POST' action='${comment}'>
-                                    <div class="input-group">
-                                      <div class="input-group-btn">
-                                      <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
-                                      </div>
-                                      <input type="text" class="form-control" placeholder="Add a comment..">
-                                    </div>
-                                    </form:form>
-                                    
-                                  </div>
-                               </div>
-
-                              
-                               <div class="panel panel-default">
-                                <div class="panel-thumbnail"><img src="/assets/example/bg_4.jpg" class="img-responsive"></div>
-                                <div class="panel-body">
-                                  <p class="lead">Social Good</p>
-                                  <p>1,200 Followers, 83 Posts</p>
-                                  
-                                  <p>
-                                    <img src="https://lh6.googleusercontent.com/-5cTTMHjjnzs/AAAAAAAAAAI/AAAAAAAAAFk/vgza68M4p2s/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                                    <img src="https://lh4.googleusercontent.com/-6aFMDiaLg5M/AAAAAAAAAAI/AAAAAAAABdM/XjnG8z60Ug0/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                                    <img src="https://lh4.googleusercontent.com/-9Yw2jNffJlE/AAAAAAAAAAI/AAAAAAAAAAA/u3WcFXvK-g8/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                                  </p>
-                                </div>
-                              </div>
-                            
-                          </div>
-                       </div><!--/row-->
+                               <div class="panel panel-default" id="postLoad">
+                         </div><!--/row-->
                       
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <a href="#">Twitter</a> <small class="text-muted">|</small> <a href="#">Facebook</a> <small class="text-muted">|</small> <a href="#">Google+</a>
-                          </div>
-                        </div>
                       
                         <div class="row" id="footer">    
                           <div class="col-sm-6">
@@ -283,7 +284,7 @@ function madeAjaxCall(){
                           </div>
                           <div class="col-sm-6">
                             <p>
-                            <a href="#" class="pull-right">©Copyright 2013</a>
+                            <a href="#" class="pull-right">©Copyright 2015</a>
                             </p>
                           </div>
                         </div>
@@ -292,6 +293,7 @@ function madeAjaxCall(){
                       
                     </div><!-- /col-9 -->
                 </div><!-- /padding -->
+                
             </div>
             <!-- /main -->
           
@@ -312,7 +314,7 @@ Update Status
        <c:url var="share" value='/lendingPage/+${username}/+${share}' />
           <form:form class="form center-block" role="form" id='shareForm'  modelAttribute='shareAttribute' method='POST' action='${share}'>                          
             <div class="form-group">
-              <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+              <textarea class="form-control input-lg" placeholder="What do you want to share?"></textarea>
             </div>
           </form:form>
       </div>
@@ -325,5 +327,6 @@ Update Status
   </div>
   </div>
 </div>  
+
 </body>
 </html>

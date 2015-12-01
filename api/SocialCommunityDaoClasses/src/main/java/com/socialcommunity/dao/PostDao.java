@@ -19,16 +19,6 @@ import com.socialcommunity.domain.Post;
 public class PostDao {
 	
 	protected static Logger logger = Logger.getLogger("DataAccessLayer");
-	
-	private SessionFactory sessionFactory;
-	
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	/**
 	 * Retrieves all posts
@@ -46,6 +36,11 @@ public class PostDao {
 		Query query = session.createQuery("FROM  Post");
 		
 		// Retrieve all
+		
+		session.getTransaction().commit();
+		session.close();
+	
+		
 		return  query.list();
 	}
 	
@@ -54,12 +49,14 @@ public class PostDao {
 	 */
 	public Post get( Integer post_id ) {
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		
+
 		// Retrieve existing person first
 		Post post = (Post) session.get(Post.class, post_id);
 		
+		session.getTransaction().commit();
+		session.close();
 		
 		return post;
 	}
@@ -71,11 +68,15 @@ public class PostDao {
 		logger.debug("Adding new post");
 		
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		
 		// Save
 		session.save(post);
+		session.getTransaction().commit();
+		session.close();
+	
 	}
 	
 	/**
@@ -86,13 +87,17 @@ public class PostDao {
 		logger.debug("Deleting existing comment");
 		
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		// Retrieve existing person first
 		Post post = (Post) session.get(Post.class, post_id);
 		
 		// Delete 
 		session.delete(post);
+		session.getTransaction().commit();
+		session.close();
+	
 	}
 	
 	/**
@@ -102,7 +107,8 @@ public class PostDao {
 		logger.debug("Editing existing post");
 		
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		// Retrieve existing person via id
 		Post existingPost = (Post) session.get(Post.class, post.getPost_id());
@@ -112,6 +118,9 @@ public class PostDao {
 
 		// Save updates
 		session.save(existingPost);
+		session.getTransaction().commit();
+		session.close();
+	
 	}
 	
 	
@@ -119,14 +128,17 @@ public class PostDao {
 	public List<Post> getPostInformation(String username) {
 		// TODO Auto-generated method stub
 		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		String hql = "FROM Post as E WHERE E.username = ?";
 		
 		Query query=session.createQuery(hql);
 		query.setParameter(0, username);
 		List<Post> list=query.list();
 		
-		
+		session.getTransaction().commit();
+		session.close();
+	
 		
 		return list;
 	}

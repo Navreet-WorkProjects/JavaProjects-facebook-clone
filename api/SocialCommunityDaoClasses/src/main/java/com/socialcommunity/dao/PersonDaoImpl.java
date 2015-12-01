@@ -19,21 +19,13 @@ public class PersonDaoImpl implements PersonDao{
 	
 	protected static Logger logger = Logger.getLogger("DataAccessLayer");
 	
-
-	private SessionFactory sessionFactory;
 	
 	/**
 	 * Retrieves all persons
 	 * 
 	 * @return a list of persons
 	 */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 	public List<Person> getAll() {
 		logger.debug("Retrieving all persons");
 
@@ -200,12 +192,7 @@ public class PersonDaoImpl implements PersonDao{
 		List<Person> list=query.list();
 		session.getTransaction().commit();
 		session.close();
-		
-		
-		
+			
 		return list;
 	}
-	
-
-	
 }

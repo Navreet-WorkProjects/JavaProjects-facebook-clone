@@ -25,10 +25,8 @@
 	<mvc:annotation-driven /> 
 	
 	<!-- Load Hibernate related configuration -->
-	<import resource="hibernate-context.xml" />
 
 <bean id="personDao" class="com.socialcommunity.dao.PersonDaoImpl">
-<property name="sessionFactory" ref="sessionFactory" />
 </bean>
 
 <bean id="personService" class="com.socialcommunity.service.PersonServiceImpl">
@@ -37,7 +35,6 @@
 
 
 <bean id="adminDao" class="com.socialcommunity.dao.AdminDaoImpl">
-
 </bean>	
 
 <bean id="adminService" class="com.socialcommunity.service.AdminServiceImpl">
@@ -45,7 +42,6 @@
 </bean>
 
 <bean id="postDao" class="com.socialcommunity.dao.PostDao">
-<property name="sessionFactory" ref="sessionFactory" />
 </bean>	
 
 <bean id="postService" class="com.socialcommunity.service.PostService">

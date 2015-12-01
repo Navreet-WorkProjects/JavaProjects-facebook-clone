@@ -11,10 +11,10 @@ public class AdminDaoImplTest extends TestCase {
 	
 	/**
 	 * Testing getUserCount()
-	 * @throws Exception 
+	 * @throws Exception .
 	 */
 	public void testGetUserCount() throws Exception {
-		Long result = 2L;
+		Long result = 1L;
 		System.out.println(adminDaoImpl.getUserCount());
 		assertEquals(result, adminDaoImpl.getUserCount());
 	}
@@ -38,7 +38,7 @@ public class AdminDaoImplTest extends TestCase {
 		Person search = adminDaoImpl.getSearchResult(username);
 		assertEquals("Navreet", search.getFirstName());
 		assertEquals("Kaur", search.getLastName());
-		assertEquals("arpitparikh@gmail.com", search.getEmail());
+		assertEquals("arpithparikh@gmail.com", search.getEmail());
 	}
 
 }

@@ -39,7 +39,8 @@ public class PostDao {
 		logger.debug("Retrieving all posts");
 		
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		// Create a Hibernate query (HQL)
 		Query query = session.createQuery("FROM  Post");
@@ -54,9 +55,11 @@ public class PostDao {
 	public Post get( Integer post_id ) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
 		
 		// Retrieve existing person first
 		Post post = (Post) session.get(Post.class, post_id);
+		
 		
 		return post;
 	}

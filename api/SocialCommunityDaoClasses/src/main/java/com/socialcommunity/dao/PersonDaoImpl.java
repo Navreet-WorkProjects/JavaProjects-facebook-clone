@@ -36,14 +36,16 @@ public class PersonDaoImpl implements PersonDao{
 	}
 	public List<Person> getAll() {
 		logger.debug("Retrieving all persons");
-		
+
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		// Create a Hibernate query (HQL)
 		Query query = session.createQuery("FROM  Person");
 		
 		List<Person> list=query.list();
 		
+		session.getTransaction().commit();
 		// Retrieve all persons
 		return  list;
 	}
@@ -69,7 +71,8 @@ public class PersonDaoImpl implements PersonDao{
 		logger.debug("Adding new User");
 		
 		// Retrieve session from Hibernate
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 
 		person.setPassword(createHash(password));
 		
@@ -79,6 +82,8 @@ public class PersonDaoImpl implements PersonDao{
 		
 		// Save
 		session.save(person);
+		session.getTransaction().commit();
+		
 	}
 	
 	/**
@@ -138,7 +143,9 @@ public class PersonDaoImpl implements PersonDao{
 	
 	  public String checkLogin(String userName, String password) throws HibernateException, NoSuchAlgorithmException{
 			System.out.println("In Check login");
-			Session session = sessionFactory.openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			
 			String userFound;
 			
 			//Query using Hibernate Query Language
@@ -160,7 +167,7 @@ public class PersonDaoImpl implements PersonDao{
 			{
 				userFound="error";
 			}
-
+			session.getTransaction().commit();
 			session.close();
 			return userFound;              
      }
@@ -168,14 +175,15 @@ public class PersonDaoImpl implements PersonDao{
 	public List<Person> getUserInformation(String username) {
 		// TODO Auto-generated method stub
 		
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "FROM Person as E WHERE E.username = ?";
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
+		String hql = "FROM Person as E WHERE E.username = ?";
 		Query query=session.createQuery(hql);
 		query.setParameter(0, username);
 		List<Person> list=query.list();
-		
-		
+		session.getTransaction().commit();
+		session.close();
 		
 		return list;
 	}
@@ -183,13 +191,15 @@ public class PersonDaoImpl implements PersonDao{
 
 	public List<Person> getUserNameInformation() {
 		// TODO Auto-generated method stub
-		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		String hql = "FROM Person ";
 		
 		Query query=session.createQuery(hql);
 		
 		List<Person> list=query.list();
+		session.getTransaction().commit();
+		session.close();
 		
 		
 		

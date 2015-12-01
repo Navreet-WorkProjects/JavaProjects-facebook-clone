@@ -81,9 +81,7 @@
 			 
 			  
 			    $("#postLoad").append("<div id="+i+	"class='panel-body'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
-			    append("<div class='input-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");
-				   
-			        
+			    append("<div class='input-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
 			  }
 		  
 		  },
@@ -91,9 +89,8 @@
 			alert(response);
 		  }
 		 });
-	 
 	  
-		 $.ajax({
+	$.ajax({
 	  type: "post",
 	  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/show",
 	  cache: true,    
@@ -132,11 +129,9 @@
 				}
 		 });
 			
-		 */ 
-		 
+		 */ 	 
 		 var list = ${list};
 			
-		
 			$(document).ready(function() {
 			    $("#auto").autocomplete({
 			        source: function(req, add) {
@@ -150,6 +145,9 @@
 			        },
 			        select: function(event, ui) {
 			            alert(ui.item.label);
+
+			            
+			            $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+ui.item.label); 
 			            
 			        }
 			    });
@@ -164,19 +162,16 @@
                 
                
 function madeAjaxCall1(){
- alert($("#username1").html());
-
+	
+$(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+$("#auto").val()); 
 
 }
 </script>
-		
+<script type="text/javascript">
+function madeAjaxCall()
+{
 	
-	
-                <script type="text/javascript">
-                
-               
-function madeAjaxCall(){
-	$.ajax({
+$.ajax({
   type: "post",
   url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/post",
   cache: false,    
@@ -188,17 +183,16 @@ function madeAjaxCall(){
   error: function(response){      
    alert(response);
   }
- });
+});
+
 }
 </script>
-
-   
    
 </head>
 <body>
 
     <div class="box" style="align:center">
-        <div class="row row-offcanvas row-offcanvas-left">
+    <div class="row row-offcanvas row-offcanvas-left">
                            
             <!-- main right col -->
             <div class="column col-sm-12 col-xs-11" id="main">
@@ -212,8 +206,7 @@ function madeAjaxCall(){
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
                       </button>
-                      <a href="/" class="navbar-brand logo">b</a>
-                  </div>
+                            </div>
                   <nav class="collapse navbar-collapse" role="navigation">
                  <input type="text"  id="auto" value="">
 	<span>
@@ -222,7 +215,8 @@ function madeAjaxCall(){
                     
                   </nav>
                 </div>
-                
+                <!--  search result -->
+                <div id = "result" height = "30px" width = "100%"></div>
                                     
                 <!-- /top nav -->
             
@@ -234,15 +228,11 @@ function madeAjaxCall(){
                           
                          <!-- main col left --> 
                          <div class="col-sm-12">
-                           
                               <div class="panel panel-default">
                                 <div class="panel-thumbnail"><!-- <img src="/assets/example/bg_5.jpg" class="img-responsive">--></div>
                                 <div class="panel-body">
                                   <p id="username1" class="lead">${username}</p>
-                                  <p>13 Posts</p>
-                                  
-                                 
-                                    
+                                  <p>13 Posts</p>                                
                                     <p>
                                         <ul>
                                             <li id="firstName"></li>

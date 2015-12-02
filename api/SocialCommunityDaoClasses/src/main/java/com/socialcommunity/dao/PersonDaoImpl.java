@@ -160,7 +160,7 @@ public class PersonDaoImpl implements PersonDao{
 				userFound="error";
 			}
 			session.getTransaction().commit();
-			session.close();
+		
 			return userFound;              
      }
 
@@ -175,8 +175,6 @@ public class PersonDaoImpl implements PersonDao{
 		query.setParameter(0, username);
 		List<Person> list=query.list();
 		session.getTransaction().commit();
-		session.close();
-		
 		return list;
 	}
 	
@@ -191,8 +189,7 @@ public class PersonDaoImpl implements PersonDao{
 		
 		List<Person> list=query.list();
 		session.getTransaction().commit();
-		session.close();
-			
+		
 		return list;
 	}
 }

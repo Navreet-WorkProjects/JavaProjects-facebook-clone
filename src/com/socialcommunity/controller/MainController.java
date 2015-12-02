@@ -120,6 +120,25 @@ public class MainController {
 	}
       
 }
+
+  @RequestMapping(value = "/lendingPage/logout", method = RequestMethod.GET)
+  public String logout(HttpSession session) throws NoSuchAlgorithmException {
+		logger.debug("Received request to add new person");
+	
+		session.removeAttribute("username");
+		if (session != null) {
+		    session.invalidate();
+		}		
+		
+  	
+		return "redirect:/lendingPage	";
+	}
+
+  
+  
+  
+  
+  
   
 /*
   

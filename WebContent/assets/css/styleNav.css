@@ -809,8 +809,12 @@ html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 	/* background: #222 url(tree-closed.gif) no-repeat 10px center;  */
 	font-size: 13px;
 }
-
-
+ul.ui-menu {
+	background: blue;
+}
+li.ui-menu-item {
+	background: blue;
+}
 
 
 

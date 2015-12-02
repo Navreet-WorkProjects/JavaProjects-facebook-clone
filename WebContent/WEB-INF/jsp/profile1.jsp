@@ -67,16 +67,18 @@
    var json= ${list};
 	  
 
-	  for(var i = 0; i < json.length; i++) {
-		    var obj = json[i];
-
-		    console.log(obj.id);
-		    alert(obj.id);
-		    alert("hi");
-		}
+	  
    
 			
   $(document).ready(function() {
+	  
+	  for(var i = 0; i < json.length; i++) {
+		    var obj = json[i];
+
+		    console.log(obj.username);
+		    alert(obj.username);
+		    alert("hi");
+		}
 	  
 	  
 	  $.ajax({

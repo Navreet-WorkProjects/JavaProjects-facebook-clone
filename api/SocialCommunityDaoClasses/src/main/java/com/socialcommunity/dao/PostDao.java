@@ -1,20 +1,10 @@
 package com.socialcommunity.dao;
-
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import com.socialcommunity.domain.Comment;
-import com.socialcommunity.domain.Person;
 import com.socialcommunity.domain.Post;
-
-
 
 public class PostDao {
 	
@@ -75,7 +65,6 @@ public class PostDao {
 		// Save
 		session.save(post);
 		session.getTransaction().commit();
-		session.close();
 	
 	}
 	
@@ -96,7 +85,7 @@ public class PostDao {
 		// Delete 
 		session.delete(post);
 		session.getTransaction().commit();
-		session.close();
+	
 	
 	}
 	
@@ -119,8 +108,7 @@ public class PostDao {
 		// Save updates
 		session.save(existingPost);
 		session.getTransaction().commit();
-		session.close();
-	
+		
 	}
 	
 	
@@ -137,7 +125,7 @@ public class PostDao {
 		List<Post> list=query.list();
 		
 		session.getTransaction().commit();
-		session.close();
+	
 	
 		
 		return list;

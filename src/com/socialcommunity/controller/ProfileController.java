@@ -80,7 +80,7 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
-			ModelAndView model1 = new ModelAndView("profile1");
+			ModelAndView model1 = new ModelAndView("viewAllUser");
 			
 			 model1.addObject("list", json);
 			
@@ -120,6 +120,8 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	   Post post = new Post();
 	   String username=(String) session.getAttribute("username");
 	   String post1 = request.getParameter("post_date");
+	   
+	   System.out.println(post1);
 	   Date date=new Date();
 	   String date1=""+date.getTime();
 	   
@@ -127,12 +129,14 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	   post.setPost_date(date1);
 	   post.setUsername(username);
 	   
+	   
 	   System.out.println(date);
 	   
 	   postService.addPost(post);
 	   
 	   return "Submit";
 	  }
+	  
   @RequestMapping(value = "/lendingPage/public/search",method = RequestMethod.GET)
 	  public @ResponseBody()
 	  String Search(HttpServletRequest request, HttpServletResponse response,HttpSession session)
@@ -161,6 +165,7 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	   Person person = new Person();
 	   String username=(String) session.getAttribute("username");
 	 
+	   System.out.println(username);
 	   
 	  List<Person> list = personService.getUserInformation(username);
 	   

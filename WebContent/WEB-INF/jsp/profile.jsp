@@ -138,7 +138,7 @@
 			$(document).ready(function() {
 				
 
-				  if(json.length==0)
+				  if(list.length==0)
 					  {	
 						
 					  $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/error"); 

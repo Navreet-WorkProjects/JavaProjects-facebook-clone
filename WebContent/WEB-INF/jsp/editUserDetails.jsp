@@ -74,7 +74,7 @@
 								style="padding-top: 2px; padding-left: 2px; padding-right: 2px; padding-bottom: 2px; border-spacing: 20px">
 
 								<td valign="middle" width="100%"><p class="heading">
-								<c:if test="${username != NULL }">
+								<c:if test="${message == NULL }">
 										<b>Search Results:</b> </c:if>
 									</p> <font color="#000000" face="Arial" size="2%"><br>
 										<!-- <div class="scrollBarConfrm1" id=resultTable width="100%"> -->
@@ -82,7 +82,7 @@
 										<br>
 										<br>
 										<table width="50%" align="center" border="1">
-										<c:if test="${username != NULL }">
+										<c:if test="${message == NULL }">
 											<tr>
 												<td><b>User-Name</b></td>
 												<td><b>DOB</b></td>
@@ -103,7 +103,7 @@
 										<br>
 										<br>
 										<br>
-										<c:if test="${username != NULL }">
+										<c:if test="${message == NULL }">
 										<div align="right"><button id="Submit"  name="Submit">Submit</button></div> </c:if><!-- </div> -->
 								</font><br></td>
 							</tr>

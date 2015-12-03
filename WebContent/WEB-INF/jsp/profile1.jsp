@@ -67,19 +67,29 @@
    
    var json= ${list};
    
-   $.username;
+	   $.username;
   
   $(document).ready(function() {
 	  
 	  
+	  
+	  if(json.length==0)
+		  {	
+			
+		  $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/error"); 
+
+		  }
+	  
 	  for(var i = 0; i < json.length; i++)
 	  
 	  {
+		  
+		  
+		  
 		    var obj = json[i];
 
 		    console.log(obj.username);
 		  		  
-		    
 		    
 		    $.username=obj.username;
 		    $("#username1").text(obj.username);

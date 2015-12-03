@@ -75,6 +75,7 @@
 		  data:'username=' + $("#username1").html() ,
 		  success: function(response){
 		  
+			  
 			 
 			  
 			  var countryArray = response.split(':');
@@ -135,6 +136,18 @@
 		 var list = ${list};
 			
 			$(document).ready(function() {
+				
+
+				  if(json.length==0)
+					  {	
+						
+					  $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/error"); 
+
+					  }
+
+				
+				
+				
 			    $("#auto").autocomplete({
 			        source: function(req, add) {
 			            add($.map(list, function(el) {

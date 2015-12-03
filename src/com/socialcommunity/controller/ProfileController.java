@@ -174,7 +174,7 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	  for (int i=0; i<list.size(); i++){
 		   Person row =  list.get(i);
 		   System.out.println("Element "+i+row.getGender());
-		   output=row.getFirstName()+":"+row.getLastName()+":"+row.getEmail();
+		   output=row.getFirstName()+":"+row.getLastName()+":"+row.getEmail()+":"+row.getDOB();
 		  
 		}
 	   return output;
@@ -197,5 +197,29 @@ protected static Logger logger = Logger.getLogger("ProfileController");
 	 
 	  	   return output;
 	  	}
-		  
+
+  
+  @RequestMapping(value = "/lendingPage/public/{username}/list",method = RequestMethod.POST)
+  public @ResponseBody()
+  String listPublic(@PathVariable("username")String username,HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
+   
+   Post post = new Post();
+ 
+   List<Post> list = postService.getPostInformation(username);
+   
+   System.out.println("Hi"+username);
+   
+   String output = "";
+  
+   for (int i=0; i<list.size(); i++){
+	   Post row =  list.get(i);
+	   System.out.println("Element "+i+row.getPost());
+	   output=output+":"+row.getPost();
+	   
+	}
+ 
+  	   return output;
+  	}
+
+  
 }

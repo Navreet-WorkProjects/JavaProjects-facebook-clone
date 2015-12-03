@@ -106,6 +106,7 @@
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
+    
     <dependency>
     	<groupId>javax.persistence</groupId>
     	<artifactId>persistence-api</artifactId>

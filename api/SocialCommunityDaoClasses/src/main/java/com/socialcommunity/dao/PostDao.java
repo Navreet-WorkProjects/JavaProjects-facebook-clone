@@ -54,7 +54,7 @@ public class PostDao {
 	 * Adds a new post
 	 * @throws NoSuchAlgorithmException 
 	 */
-	public void addPost(Post post) {
+	public String addPost(Post post) {
 		logger.debug("Adding new post");
 		
 		// Retrieve session from Hibernate
@@ -65,6 +65,7 @@ public class PostDao {
 		// Save
 		session.save(post);
 		session.getTransaction().commit();
+		return "success";
 	
 	}
 	

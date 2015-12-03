@@ -66,38 +66,44 @@
    
    
    var json= ${list};
+   
+   $.username;
   
   $(document).ready(function() {
 	  
 	  
-	  for(var i = 0; i < json.length; i++) {
+	  for(var i = 0; i < json.length; i++)
+	  
+	  {
 		    var obj = json[i];
 
 		    console.log(obj.username);
-		    alert(obj.username);
-		    alert("hi");
-		    
-		    $("#username1").html=obj.username;
+		  		  
 		    
 		    
+		    $.username=obj.username;
+		    $("#username1").text(obj.username);
+		    $("#firstName").text(obj.firstName);    
+		    $("#lastName").text(obj.lastName);
+		    $("#email").text(obj.email);
+		    $("#dob").text(obj.dob);
+		    
+		  	
 		}
-	  
-	  
-	  
+
 	  $.ajax({
 		  type: "post",
-		  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/list",
-		  cache: true,    
-		  data:'username=' + $("#username1").html() ,
+		  url: "http://localhost:9090/SocialCommunity/lendingPage/public/"+$("#username1").html()+"/list",
 		  success: function(response){
 		  
-			 
+		
 			  
 			  var countryArray = response.split(':');
 
 			  for (var i = 1; i < countryArray.length; i++) {
 			 	
-				alert(countryArray[i]);
+				  var count=countryArray.length-1;
+				  $("#postCount").html("<b>"+count+"<b/>"+"<b>Posts<b/>");
 			  
 			    $("#postLoad").append("<div id="+i+	"class='container-fluid col-md-12' style='margin:0%'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
 			    append("<div class='form-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
@@ -108,31 +114,11 @@
 			alert(response);
 		  }
 		 });
-	  
-	$.ajax({
-	  type: "post",
-	  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/show",
-	  cache: true,    
-	  data:'username=' + $("#username1").html() ,
-	  success: function(response){
-	  var countryArray = response.split(':');
 
-	  for (var i = 0; i < countryArray.length; i++) {
 	  
-    
-	    $("#firstName").text(countryArray[0]);
-	    $("#lastName").text(countryArray[1]);
-	    $("#email").text(countryArray[2]);
-	  }
-	  
-	  },
-	  error: function(response){      
-		alert(response);
-	  }
-	 });
-		
-		 
-		 /* 
+  });
+  
+	  		 /* 
 		 $.ajax({
 		  type: "GET",
 		  url: "http://localhost:9090/SocialCommunity/lendingPage/public/search",
@@ -148,32 +134,7 @@
 		 });
 			
 		 */ 	 
-		 
-		 var list = ${list};
-			
-			$(document).ready(function() {
-			    $("#auto").autocomplete({
-			        source: function(req, add) {
-			            add($.map(list, function(el) {
-			                return {
-			                    label: el.username,
-			                    zzz: el.id,
-			                    firstname:el.firstname
-			                };
-			            }));
-			        },
-			        select: function(event, ui) {
-			            alert(ui.item.label);
-
-			            
-			            $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+ui.item.label); 
-			            
-			        }
-			    });
-			});
-				  			
-  });
-                  
+		                   
              
 </script>
 		
@@ -194,26 +155,7 @@ function LogoutAjaxCall()
 
 </script>
 
-<script type="text/javascript">
-function madeAjaxCall()
-{
-	
-$.ajax({
-  type: "post",
-  url: "http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1")+"/post",
-  cache: false,    
-  data:'post_date='+ $("#post_date").val() ,
-  success: function(response){
-  alert(response);
-  
-  },
-  error: function(response){      
-   alert(response);
-  }
-});
 
-}
-</script>
    
 </head>
 <body>
@@ -245,8 +187,8 @@ $.ajax({
                       
                 	<!-- content -->                      
                 	<div class="row col-md-12" style="padding:25px;">      
-                    	<p id="username1" class="lead"></p>
-                        <p>13 Posts</p>                                
+                    	<p id="username1" class="lead">Hi</p>
+                        <p id="postCount"></p>                                
                         <ul class="list-inline">
                         	<li><strong>First Name</strong></li>
                             <li id="firstName"></li>
@@ -255,14 +197,14 @@ $.ajax({
                             <li><strong>Email</strong></li>
                             <li id="email"></li>
                             <li><strong>Date of Birth</strong></li>
-                            <li id="dob">DOB:</li>
+                            <li id="dob"></li>
                         </ul>
                     </div>
                     
                    
     			
     			<div class="container-fluid col-md-12">
-    				<div class="panel panel-default" style="padding:25px;" id="postLoad"></div>
+    				<div class="panel panel-default" style="padding:25px; margin-left:0px;" id="postLoad"></div>
     			</div>
     
     			<div class="container-fluid col-md-12" id="footer">

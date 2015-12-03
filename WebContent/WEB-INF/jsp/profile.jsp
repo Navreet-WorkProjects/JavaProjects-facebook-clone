@@ -34,7 +34,7 @@
      <!-- FONT AWESOME ICONS STYLES -->
     <!-- CUSTOM CSS -->
     <link href='<c:url value="/assets/css/style.css"/>' rel="stylesheet" />
-    <link href='<c:url value="/assets/css/styles.css"/>' rel="stylesheet" />
+    
     
      <!-- IE10 viewport hack  -->
     <script src="js/ie-10-view-port.js"></script>
@@ -80,7 +80,8 @@
 			  var countryArray = response.split(':');
 
 			  for (var i = 1; i < countryArray.length; i++) {
-			 				  
+				  var count=countryArray.length-1;
+				  $("#postCount").html("<b>"+count+"<b/>"+"<b>Posts<b/>");
 			    $("#postLoad").append("<div id="+i+	"class='container-fluid col-md-12' style='margin:0%'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
 			    append("<div class='form-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
 			  }
@@ -105,6 +106,7 @@
 	    $("#firstName").text(countryArray[0]);
 	    $("#lastName").text(countryArray[1]);
 	    $("#email").text(countryArray[2]);
+	    $("#dob").text(countryArray[3]);
 	  }
 	  
 	  },
@@ -236,7 +238,7 @@ $.ajax({
                 	<!-- content -->                      
                 	<div class="row col-md-12" style="padding:25px;">      
                     	<p id="username1" class="lead">${username}</p>
-                        <p>13 Posts</p>                                
+                        <p id="postCount"></p>                                
                         <ul class="list-inline">
                         	<li><strong>First Name</strong></li>
                             <li id="firstName"></li>
@@ -245,7 +247,7 @@ $.ajax({
                             <li><strong>Email</strong></li>
                             <li id="email"></li>
                             <li><strong>Date of Birth</strong></li>
-                            <li id="dob">DOB:</li>
+                            <li id="dob"></li>
                         </ul>
                     </div>
                     
@@ -261,7 +263,7 @@ $.ajax({
              	</div>
     			
     			<div class="container-fluid col-md-12">
-    				<div class="panel panel-default" style="padding:25px;" id="postLoad"></div>
+    				<div class="panel panel-default" style="padding:25px; margin-left:0px;" id="postLoad"></div>
     			</div>
     
     			<div class="container-fluid col-md-12" id="footer">

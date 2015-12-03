@@ -81,7 +81,7 @@ public class MainController {
 		
     	// The "personAttribute" model has been passed to the controller from the JSP
     	// We use the name "personAttribute" because the JSP uses that name
-		
+		try {
 		if (result.hasErrors()) {
 		     return "/lendingPage";
 		   }
@@ -91,6 +91,12 @@ public class MainController {
 		// Call PersonService to do the actual adding
 		personService.addUser(person.getPassword(), person);
 
+		
+		} catch (Exception e) {
+			return "redirect:/lendingPage/error";
+		}
+		
+		
     	// This will resolve to /WEB-INF/jsp/addedpage.jsp
 		return "redirect:/lendingPage	";
 	}
@@ -141,12 +147,6 @@ public class MainController {
   	
 		return "redirect:/lendingPage	";
 	}
-
-  
-  
-  
-  
-  
   
 /*
   

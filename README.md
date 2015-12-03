@@ -4,7 +4,7 @@
 ## Name of the project:
 | Project | Application Name |
 | ------- | ----------- |
-| Facebook-clone | Pengyou |
+| Facebook-clone | SocialCommunity |
 
 ## Members :
 

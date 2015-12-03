@@ -159,7 +159,7 @@
 			            }));
 			        },
 			        select: function(event, ui) {
-			            alert(ui.item.label);
+			            
 
 			            
 			            $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+ui.item.label); 

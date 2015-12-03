@@ -80,9 +80,7 @@
 			  var countryArray = response.split(':');
 
 			  for (var i = 1; i < countryArray.length; i++) {
-			 	
-				alert(countryArray[i]);
-			  
+			 				  
 			    $("#postLoad").append("<div id="+i+	"class='container-fluid col-md-12' style='margin:0%'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
 			    append("<div class='form-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
 			  }
@@ -187,7 +185,8 @@ $.ajax({
   cache: false,    
   data:'post_date='+ $("#post_date").val() ,
   success: function(response){
-  alert(response);
+  
+	$(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/"+$("#username1").html()); 
   
   },
   error: function(response){      

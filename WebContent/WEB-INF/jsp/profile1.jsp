@@ -64,13 +64,11 @@
       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
    <script>
    
-   var json= ${list};
-	  
-
-	  
    
-			
+   var json= ${list};
+  
   $(document).ready(function() {
+	  
 	  
 	  for(var i = 0; i < json.length; i++) {
 		    var obj = json[i];
@@ -78,7 +76,12 @@
 		    console.log(obj.username);
 		    alert(obj.username);
 		    alert("hi");
+		    
+		    $("#username1").html=obj.username;
+		    
+		    
 		}
+	  
 	  
 	  
 	  $.ajax({
@@ -88,13 +91,16 @@
 		  data:'username=' + $("#username1").html() ,
 		  success: function(response){
 		  
+			 
+			  
 			  var countryArray = response.split(':');
 
 			  for (var i = 1; i < countryArray.length; i++) {
-			 
+			 	
+				alert(countryArray[i]);
 			  
-			    $("#postLoad").append("<div id="+i+	"class='panel-body'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
-			    append("<div class='input-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
+			    $("#postLoad").append("<div id="+i+	"class='container-fluid col-md-12' style='margin:0%'>").append("<div  id="+i+"><h4>"+countryArray[i]+"</h4>	</div>").append("<div class='clearfix'></div><form class='form-horizontal' role='form' id='commentForm'  modelAttribute='commentAttribute' method='POST' action=''>").
+			    append("<div class='form-group'>").append(" <input type='text' class='form-control' placeholder='Add a comment..'>").append(" <div class='input-group-btn'>").append(" <button class='btn btn-default'>+1</button><button class='btn btn-default'><i class='glyphicon glyphicon-share'></i></button> </div>").append("</div></form></div>");        
 			  }
 		  
 		  },
@@ -113,8 +119,7 @@
 
 	  for (var i = 0; i < countryArray.length; i++) {
 	  
-		  alert(countryArray[i]);
-	    
+    
 	    $("#firstName").text(countryArray[0]);
 	    $("#lastName").text(countryArray[1]);
 	    $("#email").text(countryArray[2]);
@@ -126,7 +131,7 @@
 	  }
 	 });
 		
-  });
+		 
 		 /* 
 		 $.ajax({
 		  type: "GET",
@@ -142,18 +147,53 @@
 				}
 		 });
 			
-		 */ 	  
+		 */ 	 
+		 
+		 var list = ${list};
+			
+			$(document).ready(function() {
+			    $("#auto").autocomplete({
+			        source: function(req, add) {
+			            add($.map(list, function(el) {
+			                return {
+			                    label: el.username,
+			                    zzz: el.id,
+			                    firstname:el.firstname
+			                };
+			            }));
+			        },
+			        select: function(event, ui) {
+			            alert(ui.item.label);
+
+			            
+			            $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+ui.item.label); 
+			            
+			        }
+			    });
+			});
+				  			
+  });
+                  
+             
 </script>
 		
                 <script type="text/javascript">
-                
                
 function madeAjaxCall1(){
 	
 $(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/public/"+$("#auto").val()); 
 
 }
+
+function LogoutAjaxCall()
+{
+	$(window).attr("location","http://localhost:9090/SocialCommunity/lendingPage/logout"); 
+
+}
+
+
 </script>
+
 <script type="text/javascript">
 function madeAjaxCall()
 {
@@ -178,85 +218,66 @@ $.ajax({
 </head>
 <body>
 
-    <div class="box" style="align:center">
-    <div class="row row-offcanvas row-offcanvas-left">
-                           
-            <!-- main right col -->
-            <div class="column col-sm-12 col-xs-11" id="main">
+<div class="box" style="align:center;">
+	<div class="conntainer-fluid">
+		<!-- main right col -->
+        <div class="col-md-12" id="main">
                 
-                <!-- top nav -->
-              <div class="navbar navbar-blue navbar-static-top" style="background: #48A5FF">  
-                    <div class="navbar-header">
-                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle</span>
-                        <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-                      </button>
-                            </div>
-                  <nav class="collapse navbar-collapse" role="navigation">
-             
-                    
-                  </nav>
-                </div>
-                <!--  search result -->
-                <div id = "result" height = "30px" width = "100%"></div>
-                                    
-                <!-- /top nav -->
+        	<!-- top nav -->
+            <div class="navbar navbar-static-top" style="background: #48A5FF;padding:25px;">
+                
+                <nav class="collapse navbar-collapse" role="navigation">
+                
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>> Auto Generated Result Coming in this Span <<<<<<<<<<<<<<<<<<<<<<<<< -->
+                	
+						
+                    <span style="background: #48A5FF;align:top;">
+	  					<button id="logout-id" type="button" onclick="LogoutAjaxCall()" style="align:right">Logout</button>
+					</span>
+					
+                </nav>
+                
+        	</div>                   
+            <!-- /top nav -->
             
-                <div class="padding" style=" left: 50%;">
-                    <div class="full col-sm-9">
+            <div class="padding" style="padding:25px">
+            	<div class="full col-md-12">
                       
-                        <!-- content -->                      
-                      <div class="row">
-                          
-                         <!-- main col left --> 
-                         <div class="col-sm-12">
-                              <div class="panel panel-default">
-                                <div class="panel-thumbnail"><!-- <img src="/assets/example/bg_5.jpg" class="img-responsive">--></div>
-                                <div class="panel-body">
-                                  <p id="username1" class="lead">${username}</p>
-                                  <p>13 Posts</p>                                
-                                    <p>
-                                        <ul>
-                                            <li id="firstName"></li>
-                                            <li id="lastName"></li>
-                                            <li id="email"></li>
-                                            <li id="dob">DOB:</li>
-                                            
-                                        </ul>
-                                   
-                                </div>
-                                <div id="somediv"></div>
-                              </div>
-
-                           
-                           
-                          </div>
-                          
-                         
-                               <div class="panel panel-default" id="postLoad">
-                         </div><!--/row-->
-                      
-                      
-                        <div class="row" id="footer">    
-                          <div class="col-sm-6">
-                           
+                	<!-- content -->                      
+                	<div class="row col-md-12" style="padding:25px;">      
+                    	<p id="username1" class="lead"></p>
+                        <p>13 Posts</p>                                
+                        <ul class="list-inline">
+                        	<li><strong>First Name</strong></li>
+                            <li id="firstName"></li>
+                            <li><strong>Last Name</strong></li>
+                            <li id="lastName"></li>
+                            <li><strong>Email</strong></li>
+                            <li id="email"></li>
+                            <li><strong>Date of Birth</strong></li>
+                            <li id="dob">DOB:</li>
+                        </ul>
+                    </div>
+                    
+                   
+    			
+    			<div class="container-fluid col-md-12">
+    				<div class="panel panel-default" style="padding:25px;" id="postLoad"></div>
+    			</div>
+    
+    			<div class="container-fluid col-md-12" id="footer">
+    				<div class="col-sm-6" style="position:fixed;left:0px;bottom:0px;height:30px;width:100%;background-color:#48A5FF;" >
+        				<p><a style="color:white;" href="#">©Copyright 2015</a></p>
+					</div>
+    			</div>
                         
-                      
-                    </div><!-- /col-9 -->
-                </div><!-- /padding -->
-                
             </div>
-            <!-- /main -->
-          
+            <!-- closing Padding div-->
         </div>
-    </div>
-</div>
-
-
+        <!-- closing Main div-->
+    
 <!--post modal-->
-<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<!--  <div id="postModal" class="" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -271,15 +292,13 @@ Update Status
             </div>
           </form:form>
       </div>
-      <div class="modal-footer">
-          <div>
-          <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
-            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
- </div>
-      </div>
-  </div>
-  </div>
-</div>  
-
+		<div class="modal-footer">
+			<div>
+        		<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
+ 			</div>
+    	</div>-->
+    	<!-- Closing first div -->
+    </div>
+</div>
 </body>
 </html>

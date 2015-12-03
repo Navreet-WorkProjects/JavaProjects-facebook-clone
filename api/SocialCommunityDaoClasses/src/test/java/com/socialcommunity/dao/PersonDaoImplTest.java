@@ -34,12 +34,7 @@ public class PersonDaoImplTest extends TestCase {
 		assertNotNull(success);
 	}
 	
-	public void testCheckLogin() throws Exception {
-		String password = "password";
-		String username = "username";
-		
-		assertEquals(daoImpl.checkLogin("username", "password"), daoImpl.checkLogin(username, password));
-	}
+	
 
 	public void testGetUserInformation() throws Exception {
 			String username = "arpithparikh2";

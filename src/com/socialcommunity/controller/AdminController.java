@@ -173,6 +173,7 @@ public class AdminController {
 			}
 			// call service method to update the status
 			adminService.updatePerson(updateTheStatus, username);
+			username =null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

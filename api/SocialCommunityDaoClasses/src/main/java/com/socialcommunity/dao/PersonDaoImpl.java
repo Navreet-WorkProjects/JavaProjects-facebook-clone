@@ -141,7 +141,7 @@ public class PersonDaoImpl implements PersonDao{
 			String userFound;
 			
 			//Query using Hibernate Query Language
-			String SQL_QUERY =" FROM Person as o where o.username=? and o.password=?";
+			String SQL_QUERY =" FROM Person as o where o.username=? AND o.password=? AND o.status=? ";
 			Query query = session.createQuery(SQL_QUERY);
 			query.setParameter(0,userName);
 			
@@ -149,7 +149,11 @@ public class PersonDaoImpl implements PersonDao{
 			
 			
 			query.setParameter(1,createHash(password));
+			query.setParameter(2, "ACTIVE");
+		
 			List<Person> list = query.list();
+			
+			
 			
 			System.out.println(list);
 			if ((list != null) && (list.size() > 0)) {

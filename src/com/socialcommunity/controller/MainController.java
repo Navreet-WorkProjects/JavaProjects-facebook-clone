@@ -121,6 +121,14 @@ public class MainController {
       
 }
 
+  @RequestMapping(value = "/lendingPage/error", method = RequestMethod.GET)
+  public String error() throws HibernateException, NoSuchAlgorithmException
+  {
+	  
+	return "error";
+  }
+
+ 
   @RequestMapping(value = "/lendingPage/logout", method = RequestMethod.GET)
   public String logout(HttpSession session) throws NoSuchAlgorithmException {
 		logger.debug("Received request to add new person");

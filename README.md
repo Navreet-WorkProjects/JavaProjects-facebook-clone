@@ -34,9 +34,9 @@ In this project we are trying to create a social networking website. We have dec
 ## List of functionalities:
 1. Login and register - users can register first and then login with correct credentials.
 2. Personal profile - users can view and edit their personal profile.
-3. Connect with other users - All users can search and connect to other users.
-4. Post comments and reply to comments - Users can post comments and reply to comments already posted.
-5. Admin account - Admin can view all users, block users, view reports and graphs, etc
+3. Connect with other users - All users can search the users.(*Connect user functionality need to be imeplement) 
+4. Post comments and reply to comments - Users can post comments and reply to comments already posted.(Post feature available.)
+5. Admin account - Admin can view all users, block users.
 
 ## List of technologies to be used and reason for your selection
 1. Reason for choosing Java:

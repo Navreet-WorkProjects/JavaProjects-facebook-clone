@@ -29,7 +29,8 @@ In this project we are trying to create a social networking website. We have dec
 7. Deploy path of the SocialCommunity Project and add the Dao and Serivice libraries to the project.
 8. Upload the SocialCommunity database with provided schema.
 9. Change the path of connection url in the Hibernate.cfg.xml file.
-10. Run or deploy the dynamic project on Web Application Server.Example : Apache Tomcat or Apache Jetty.  
+10. Run or deploy the dynamic project on Web Application Server.Example : Apache Tomcat or Apache Jetty. 
+11. Welcome page will be found on "/SocialCommunity/lendingPage".
  
 ## List of functionalities:
 1. Login and register - users can register first and then login with correct credentials.

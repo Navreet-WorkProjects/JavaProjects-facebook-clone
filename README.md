@@ -17,7 +17,7 @@
 | Xiaobei Yu                  | xiaobeiYu    |
 
 ## Summary of the project:
-In this project we are trying to create a social networking website. We have decidede to call our website 'Pengyou'. Our application would have different users and they can use this site by signing up for it. We would also create an admin account who can view all the users, block users, view different users etc.We are also planning to provide the search functionality to users who are connected with each other.We call as connections instead of friend.If both users are connected with each other.The website would have love and like feature if the person want to post or share their photoes.The website would be having the security setting where the person can restrict some non-sharable items.
+In this project we are trying to create a social networking website. We have decidede to call our website 'Social Community'. Our application would have different users and they can use this site by signing up for it. We would also create an admin account who can view all the users, block users etc.We are also planning to provide the search functionality to users. Users would be able to post comments on their as well as others page.
 
 ## Steps to Run the Project
 1. git clone https://github.com/GWU-KIM-CSCI/facebook-clone.git
@@ -34,10 +34,9 @@ In this project we are trying to create a social networking website. We have dec
  
 ## List of functionalities:
 1. Login and register - users can register first and then login with correct credentials.
-2. Personal profile - users can view and edit their personal profile.
-3. Connect with other users - All users can search the users.(*Connect user functionality need to be imeplement) 
-4. Post comments and reply to comments - Users can post comments and reply to comments already posted.(Post feature available.)
-5. Admin account - Admin can view all users, block users.
+2. Search other users - All users can search the users.
+3. Post comments - Users can post comments on their page as well as others page.
+4. Admin account - Admin can block users and view number of users.
 
 ## List of technologies to be used and reason for your selection
 1. Reason for choosing Java:

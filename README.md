@@ -1,20 +1,6 @@
 <snippet>
   <content>
-# Group Project Proposal
-## Name of the project:
-| Project | Application Name |
-| ------- | ----------- |
-| Facebook-clone | SocialCommunity |
 
-## Members :
-
-| Name                        | Github Username     |
-| --------------------------- | ------------ |
-| Apoorva Kumar Channankaiah  | Apoorva25    |
-| Arpit Parikh                | arpithparikh |
-| Navreet Kaur                | navreetKaur  |
-| Rajat Vij                   | rajatvij     |
-| Xiaobei Yu                  | xiaobeiYu    |
 
 ## Summary of the project:
 In this project we are trying to create a social networking website. We have decidede to call our website 'Social Community'. Our application would have different users and they can use this site by signing up for it. We would also create an admin account who can view all the users, block users etc.We are also planning to provide the search functionality to users. Users would be able to post comments on their as well as others page.
